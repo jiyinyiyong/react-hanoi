@@ -1,0 +1,23 @@
+
+.hanoi {
+    background: rgb(243, 243, 243);
+    width: 900px;
+    height: 500px;
+}
+
+.stack {
+}
+
+.stack.dropping {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.disk {
+    background-color: rgb(162, 141, 141);
+    height: 20px;
+    margin: 1px 0 0;
+}
+
+.disk[draggable=true] {
+    cursor: move;
+}
