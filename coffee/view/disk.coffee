@@ -1,6 +1,4 @@
 
-model = require '../model'
-
 module.exports = React.createClass
   dispayName: 'disk'
 
@@ -11,7 +9,7 @@ module.exports = React.createClass
       draggable: (@props.index is 0)
       onDragStart: (event) =>
       onDragEnd: (event) =>
-        model.move @props.n
+        @props.move @props.n
 
       style:
         width: "#{@props.n * 20}px"

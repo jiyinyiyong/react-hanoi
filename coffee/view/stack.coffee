@@ -1,23 +1,23 @@
 
 DiskComp = require './disk'
 
-model = require '../model'
-
 module.exports = React.createClass
   displayName: 'stack'
 
+  getInitialState: ->
+    dragging: null
+
   render: ->
-    disks = []
-    for n, index in @props.disks
-      disks.push (DiskComp n: n, key: n, index: index)
+    disks = @props.disks.map (n, index) =>
+      DiskComp n: n, key: n, index: index, move: @props.move
+
     $.div
       className: $$.concat 'stack flex-fill column-end',
-        if @props.id is model.getDropping() then 'dropping'
+        if @props.atHover then 'dropping'
       onDragStart: (event) =>
-        model.setFrom @props.id
+        @props.setFrom @props.id
       onDragEnter: (event) =>
-        model.setDropping @props.id
-      onDrop: (event) =>
-        console.log 'drop', event
-        model.setDropping ''
+        @props.setTo @props.id
+      onDragEnd: (event) =>
+        @props.setTo null
       disks
