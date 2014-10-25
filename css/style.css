@@ -13,9 +13,25 @@
 }
 
 .disk {
-    background-color: rgb(162, 141, 141);
+    background-color: rgb(163, 136, 136);
     height: 20px;
     margin: 1px 0 0;
+}
+
+.disk.is-draggable {
+    animation: breath 2000ms infinite;
+}
+
+@keyframes breath {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .disk[draggable=true] {

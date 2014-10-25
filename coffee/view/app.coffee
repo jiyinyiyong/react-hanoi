@@ -1,43 +1,30 @@
 
 StackComp = require './stack'
 model = require '../model'
-mixins = require '../utils/mixins'
 
 module.exports = React.createClass
   displayName: 'hanoi'
-  mixins: [mixins.listenTo]
 
   getInitialState: ->
-    fromStack: null
-    toStack: null
+    draggingStack: null
 
-  componentDidMount: ->
-    @listenTo model, @_onChange
-
-  _onChange: ->
-    @setState {}
-
-  setFrom: (name) ->
-    @setState fromStack: name
-
-  setTo: (name) ->
-    @setState toStack: name
-
-  move: (n) ->
+  onDrop: (n) ->
     model.move n, @state.fromStack, @state.toStack
+
+  setDraggingStack: (n) ->
+    @setState draggingStack: n
 
   render: ->
     store = model.get()
+    console.log "draggingStack start: #{@state.draggingStack}"
 
     stacks = ['a', 'b', 'c'].map (name) =>
       StackComp
-        id: name
+        name: name
         key: name
-        disks: store[name]
-        atHover: name is @state.toStack
-        setFrom: @setFrom
-        setTo: @setTo
-        move: @move
+        disks: store
+        setDraggingStack: @setDraggingStack
+        draggingStack: @state.draggingStack
 
     $.div
       className: 'hanoi row-strech'
